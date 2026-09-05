@@ -1,0 +1,39 @@
+{
+  "manifest_version": 3,
+  "name": "FLENVN Translator",
+  "description": "Translate selected webpage text in context with FLENVN.",
+  "version": "0.1.1",
+  "minimum_chrome_version": "116",
+  "permissions": ["activeTab", "contextMenus", "scripting", "storage"],
+  "host_permissions": ["https://api.flenvn.app/*"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "icons": {
+    "16": "logo-extension.png",
+    "32": "logo-extension.png",
+    "48": "logo-extension.png",
+    "128": "logo-extension.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["subtitles.js", "content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_title": "FLENVN account",
+    "default_icon": {
+      "16": "logo-extension.png",
+      "32": "logo-extension.png"
+    },
+    "default_popup": "index.html"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["logo-extension.png", "fonts/*.woff2"],
+      "matches": ["http://*/*", "https://*/*"]
+    }
+  ]
+}
