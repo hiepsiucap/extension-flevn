@@ -273,6 +273,12 @@
     content.replaceChildren();
     content.append(makeElement("div", "label", "Translation"));
     content.append(makeElement("div", "translation", translation || "No translation available."));
+    if (result?.sourcePinyin) {
+      content.append(makeElement("div", "meta", `Source Pinyin: ${result.sourcePinyin}`));
+    }
+    if (result?.translatedPinyin) {
+      content.append(makeElement("div", "meta", `Translation Pinyin: ${result.translatedPinyin}`));
+    }
     card.hidden = false;
   }
 
@@ -308,7 +314,7 @@
     content.replaceChildren();
     const heading = makeElement("div", "word-head", "");
     heading.append(makeElement("span", "word", word));
-    if (pronunciation) heading.append(makeElement("span", "meta", pronunciation));
+    if (pronunciation) heading.append(makeElement("span", "meta", /\p{Script=Han}/u.test(word) ? `Pinyin: ${pronunciation}` : pronunciation));
     if (partOfSpeech) heading.append(makeElement("span", "meta", `• ${partOfSpeech}`));
     heading.append(createAudioPlayer(audioUrl, word));
     content.append(heading);

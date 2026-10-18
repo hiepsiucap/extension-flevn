@@ -28,6 +28,8 @@ export type Translation = {
   translatedText: string;
   sourceLanguage: string;
   targetLanguage: string;
+  sourcePinyin?: string;
+  translatedPinyin?: string;
 };
 
 export type DefinitionSuggestion = {
